@@ -3,7 +3,7 @@ import Polygon from './Polygon'
 
 console.log('Hello Webpack');
 //растягивать тетраэдр
-//класс тетраэдр в классе тетраэдр класс полигонов а полигоны состоят из точек
+//класс тетраэдр - в классе тетраэдр класс полигонов а полигоны состоят из точек
 //написать класс который делает операцию проектции (последняя колонка - масштаб, а нижняя колонка - линейный сдвиг
 //внешний класс, который пересчитывает из мировых в экранные координаты
 
@@ -22,12 +22,7 @@ let p3: Point = new Point(150, 200);
 
 let poly: Polygon = new Polygon(p1, p2, p3);
 
-
-ctx.moveTo(poly.p3.x, poly.p3.y);
-ctx.lineTo(poly.p1.x, poly.p1.y); //todo: write my own drawLine?
-ctx.lineTo(poly.p2.x, poly.p2.y);
-ctx.lineTo(poly.p3.x, poly.p3.y);
-ctx.stroke();
+poly.draw(ctx);
 
 
 
