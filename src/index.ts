@@ -16,9 +16,9 @@ const ctx: CanvasRenderingContext2D = <CanvasRenderingContext2D>canvas.getContex
 ctx.fillRect(10, 10, 10, 10);
 
 
-let p1: Point = new Point(100, 150);
-let p2: Point = new Point(50, 200);
-let p3: Point = new Point(150, 200);
+let p1: Point = new Point(100, 150, 100);
+let p2: Point = new Point(50, 200, 100);
+let p3: Point = new Point(150, 200, 100);
 
 let poly: Polygon = new Polygon(p1, p2, p3);
 

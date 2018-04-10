@@ -1,4 +1,4 @@
-import Point from './Point'
+import Point from "./Point"
 
 export default class Polygon {
     p1: Point;
@@ -11,10 +11,12 @@ export default class Polygon {
 
     draw(ctx: CanvasRenderingContext2D) {
         //todo: write my own drawPoly?
-        ctx.moveTo(this.p3.x, this.p3.y);
-        ctx.lineTo(this.p1.x, this.p1.y); //todo: write my own drawLine(from: Point, to: Point)?
-        ctx.lineTo(this.p2.x, this.p2.y);
-        ctx.lineTo(this.p3.x, this.p3.y);
+        ctx.moveTo(this.p3.x_local, this.p3.y_local);
+        ctx.lineTo(this.p1.x_local, this.p1.y_local); //todo: write my own drawLine(from: Point, to: Point)?
+        ctx.lineTo(this.p2.x_local, this.p2.y_local);
+        ctx.lineTo(this.p3.x_local, this.p3.y_local);
+
+        console.log(this.p3.x_local, this.p3.y_local);
         ctx.stroke();
     }
 }
