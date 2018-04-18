@@ -6,36 +6,29 @@ export default class Matrix {
 
      mMatrix: Array<Array<number>>;
 
-    // constructor(rotationX: number, rotationY: number, rotationZ: number, distance: number) {
-    //     this.mMatrix = [
-    //         [rotationX, 0, 0, 0],
-    //         [0, rotationY, 0, 0],
-    //         [0, 0, 0, -1/100],
-    //         [0, 0, 0, rotationZ]
-    //     ]
-    // }
-
-    //todo: constructor(array) this.array?
     constructor(matrix: Array<Array<number>>) {
         this.mMatrix = matrix;
     }
 
     //vector of size 4
-    multiplyVector(vector: Array<number>) {
-        let res: Array<number> = [];
-        let currentIndex: number = 0;
+    public multiplyOnVector(vector: Array<number>) {
 
-        for(const elemVector of vector) {
-            for(const matrixRow of this.mMatrix) {
-                let sum = 0;
-                for(const elemMatrix of matrixRow) {
-                    sum += elemVector*elemMatrix;
-                }
-                res[currentIndex] = sum;
+        if(vector.length != this.mMatrix.length)
+            console.error("sizes are not equal!");
+
+        let res: Array<number> = [];
+        let currentRowNumber: number = 0;
+
+        for(const matrixRow of this.mMatrix) {
+            let tmpSum = 0;
+            //loop through each elem in the matrixRow
+            for(let i=0; i<vector.length; i++) {
+                tmpSum += matrixRow[i]*vector[i];
             }
-            currentIndex++;
+            res[currentRowNumber] = tmpSum;
+            currentRowNumber++;
         }
 
-        return {x_local: res[0], y_local: res[1]};
+        return res;
     }
 }

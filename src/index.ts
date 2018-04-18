@@ -2,6 +2,7 @@ import Point from './Point'
 import Polygon from './Polygon'
 import Tetrahedron from "./Tetrahedron";
 import {log} from "util";
+import Matrix from "./Matrix";
 
 
 
@@ -32,5 +33,16 @@ const teth: Tetrahedron = new Tetrahedron(polyBottom, polySide12, polySide23, po
 teth.draw(ctx);
 
 
+const myMatrix: Matrix = new Matrix([
+   [1, 4],
+   [2, 5]
+]);
 
+const res: Array<number> = myMatrix.multiplyOnVector([1, 3]);
+console.log(`matmul: [${res[0]}, ${res[1]}]`);
+
+// let turnedTeth = teth.turnX(200, new Point(100, 0, 0));
+// turnedTeth.draw();
+// teth.draw(ctx);
 //todo: make matrix mull in static class Painter.paint(polygon)
+

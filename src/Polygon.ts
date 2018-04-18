@@ -17,7 +17,7 @@ export default class Polygon {
         ctx.lineTo(this.p3.x_local, this.p3.y_local);
         ctx.stroke();
 
-        this.showCoordinates([this.p1, this.p2, this.p3], ctx);
+        Polygon.showCoordinates([this.p1, this.p2, this.p3], ctx);
     }
 
     static showCoordinates(points: Array<Point>, ctx: CanvasRenderingContext2D) {
