@@ -5,7 +5,7 @@ export default class Point {
     x: number;
     y: number;
     z: number;
-    //todo: make scale ->means h 
+    //todo: make scale ->means h
     scale: number = 1;
 
     x_local: number;

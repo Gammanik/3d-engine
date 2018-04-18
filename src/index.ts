@@ -1,11 +1,12 @@
 import Point from './Point'
 import Polygon from './Polygon'
+import Tetrahedron from "./Tetrahedron";
+import {log} from "util";
 
-console.log('Hello Webpack');
-//растягивать тетраэдр
-//класс тетраэдр - в классе тетраэдр класс полигонов а полигоны состоят из точек
-//написать класс который делает операцию проектции (последняя колонка - масштаб, а нижняя колонка - линейный сдвиг
-//внешний класс, который пересчитывает из мировых в экранные координаты
+
+
+
+log('Hello Webpack');
 
 
 
@@ -19,10 +20,16 @@ ctx.fillRect(10, 10, 10, 10);
 let p1: Point = new Point(100, 150, 100);
 let p2: Point = new Point(50, 200, 100);
 let p3: Point = new Point(150, 200, 100);
+let v1: Point = new Point(100, 100, 250);
 
-let poly: Polygon = new Polygon(p1, p2, p3);
+const polyBottom: Polygon = new Polygon(p1, p2, p3);
+const polySide12: Polygon = new Polygon(p1, p2, v1);
+const polySide23: Polygon = new Polygon(p2, p3, v1);
+const polySide31: Polygon = new Polygon(p3, p1, v1);
 
-poly.draw(ctx);
+
+const teth: Tetrahedron = new Tetrahedron(polyBottom, polySide12, polySide23, polySide31);
+teth.draw(ctx);
 
 
 
