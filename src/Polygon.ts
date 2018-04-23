@@ -1,4 +1,5 @@
 import Point from "./Point"
+import Matrix from "./Matrix";
 
 export default class Polygon {
     p1: Point;
@@ -17,13 +18,20 @@ export default class Polygon {
         ctx.lineTo(this.p3.x_local, this.p3.y_local);
         ctx.stroke();
 
-        Polygon.showCoordinates([this.p1, this.p2, this.p3], ctx);
+        Polygon.drawCoordinates([this.p1, this.p2, this.p3], ctx);
     }
 
-    static showCoordinates(points: Array<Point>, ctx: CanvasRenderingContext2D) {
+    static drawCoordinates(points: Array<Point>, ctx: CanvasRenderingContext2D) {
         ctx.fillStyle = 'blue';
-        for(const point of points) {
-            ctx.fillText(`${point.x}, ${point.y}, ${point.z}`,point.x_local, point.y_local);
-        }
+        for(const point of points)
+            ctx.fillText(`${Math.round(point.x)}, ${Math.round(point.y)}, ${Math.round(point.z)}`,point.x_local, point.y_local);
+    }
+
+    public rotateAroundCenter(center: Point, rotationMatrix: Matrix) {
+        let newP1 = this.p1.rotateAroundCenter(center, rotationMatrix);
+        let newP2 = this.p2.rotateAroundCenter(center, rotationMatrix);
+        let newP3 = this.p3.rotateAroundCenter(center, rotationMatrix);
+
+        return new Polygon(newP1, newP2, newP3);
     }
 }

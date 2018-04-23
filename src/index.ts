@@ -28,21 +28,37 @@ const polySide12: Polygon = new Polygon(p1, p2, v1);
 const polySide23: Polygon = new Polygon(p2, p3, v1);
 const polySide31: Polygon = new Polygon(p3, p1, v1);
 
-
 const teth: Tetrahedron = new Tetrahedron(polyBottom, polySide12, polySide23, polySide31);
 teth.draw(ctx);
 
 
-const myMatrix: Matrix = new Matrix([
-   [1, 4],
-   [2, 5]
-]);
 
-const res: Array<number> = myMatrix.multiplyOnVector([1, 3]);
-console.log(`matmul: [${res[0]}, ${res[1]}]`);
-
-// let turnedTeth = teth.turnX(200, new Point(100, 0, 0));
+// let turnedTeth = teth.tethturnX(200, new Point(100, 0, 0));
 // turnedTeth.draw();
 // teth.draw(ctx);
-//todo: make matrix mull in static class Painter.paint(polygon)
 
+
+
+//todo check for let & const
+let p11: Point = new Point(600, 150, 100);
+let p21: Point = new Point(650, 200, 100);
+let p31: Point = new Point(550, 200, 100);
+
+let polyToTurn: Polygon = new Polygon(p11, p21, p31);
+polyToTurn.draw(ctx);
+
+
+const angle: number = 1;
+let center: Point = new Point(600, 100, 100);
+
+
+const rotationMatrixZ = Matrix.createRotationZ(angle);
+
+let newPoly: Polygon = polyToTurn.rotateAroundCenter(center, rotationMatrixZ);
+// poly11.draw(ctx); -- unchanged todo: value vs reference js & ts
+
+
+
+newPoly.draw(ctx);
+// ctx.strokeStyle= "#ff53c3"; //todo: why all of them are changed?
+// poly21.draw(ctx);

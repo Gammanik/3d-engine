@@ -11,7 +11,7 @@ export default class Matrix {
     }
 
     //vector of size 4
-    public multiplyOnVector(vector: Array<number>) {
+    public multiplyOnVector(vector: Array<number>): Array<number> {
 
         if(vector.length != this.mMatrix.length)
             console.error("sizes are not equal!");
@@ -31,4 +31,31 @@ export default class Matrix {
 
         return res;
     }
+
+    public static createRotationX(angle: number): Matrix {
+        return new Matrix([
+            [1, 0, 0],
+            [0, Math.cos(angle), -Math.sin(angle)],
+            [0, Math.sin(angle), Math.cos(angle)]
+        ]);
+    }
+
+    public static createRotationY(angle: number): Matrix {
+        return new Matrix([
+            [Math.cos(angle), 0, Math.sin(angle)],
+            [0, 1, 0],
+            [-Math.sin(angle), 0, Math.cos(angle)]
+        ]);
+    }
+
+    public static createRotationZ(angle: number): Matrix {
+        return new Matrix([
+            [Math.cos(angle), -Math.sin(angle), 0],
+            [Math.sin(angle), Math.cos(angle), 0],
+            [0, 0, 1]
+        ]);
+    }
+
+
+
 }
