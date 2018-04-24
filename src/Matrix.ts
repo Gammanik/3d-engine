@@ -32,7 +32,8 @@ export default class Matrix {
         return res;
     }
 
-    public static createRotationX(angle: number): Matrix {
+    public static createRotationX(angleRad: number): Matrix {
+        const angle = (angleRad*Math.PI)/180;
         return new Matrix([
             [1, 0, 0],
             [0, Math.cos(angle), -Math.sin(angle)],
@@ -40,7 +41,8 @@ export default class Matrix {
         ]);
     }
 
-    public static createRotationY(angle: number): Matrix {
+    public static createRotationY(angleRad: number): Matrix {
+        const angle = (angleRad*Math.PI)/180;
         return new Matrix([
             [Math.cos(angle), 0, Math.sin(angle)],
             [0, 1, 0],
@@ -48,7 +50,8 @@ export default class Matrix {
         ]);
     }
 
-    public static createRotationZ(angle: number): Matrix {
+    public static createRotationZ(angleRad: number): Matrix {
+        const angle = (angleRad*Math.PI)/180;
         return new Matrix([
             [Math.cos(angle), -Math.sin(angle), 0],
             [Math.sin(angle), Math.cos(angle), 0],

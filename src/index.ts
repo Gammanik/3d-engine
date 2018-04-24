@@ -5,10 +5,7 @@ import {log} from "util";
 import Matrix from "./Matrix";
 
 
-
-
 log('Hello Webpack');
-
 
 
 const canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('myCanvas');
@@ -31,7 +28,10 @@ const polySide31: Polygon = new Polygon(p3, p1, v1);
 const teth: Tetrahedron = new Tetrahedron(polyBottom, polySide12, polySide23, polySide31);
 teth.draw(ctx);
 
-
+//todo: add Polygons, Teth ect in the figuresTree during creation
+//todo: add class Figure.draw()
+// function drawAllFigures(figuresTree: Array<Figure>) {}
+function redrawAllFigures(figuresTree: Array<number>) {}
 
 // let turnedTeth = teth.tethturnX(200, new Point(100, 0, 0));
 // turnedTeth.draw();
@@ -48,17 +48,15 @@ let polyToTurn: Polygon = new Polygon(p11, p21, p31);
 polyToTurn.draw(ctx);
 
 
-const angle: number = 1;
+let angle: number = 55;
 let center: Point = new Point(600, 100, 100);
 
 
 const rotationMatrixZ = Matrix.createRotationZ(angle);
 
-let newPoly: Polygon = polyToTurn.rotateAroundCenter(center, rotationMatrixZ);
+let turnedPoly: Polygon = polyToTurn.rotateAroundCenter(center, rotationMatrixZ);
 // poly11.draw(ctx); -- unchanged todo: value vs reference js & ts
 
+turnedPoly.draw(ctx);
 
 
-newPoly.draw(ctx);
-// ctx.strokeStyle= "#ff53c3"; //todo: why all of them are changed?
-// poly21.draw(ctx);
