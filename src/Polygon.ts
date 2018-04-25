@@ -34,4 +34,23 @@ export default class Polygon {
 
         return new Polygon(newP1, newP2, newP3);
     }
+
+    public drag(dx: number, dy: number, dz: number, scale: number) {
+        this.p1.x += dx;
+        this.p1.y += dy;
+        this.p2.z += dz;
+    }
+
+    public areCoordsInside(x: number, y: number): boolean {
+        const a: number = ((this.p1.x_local - x) * (this.p2.y_local - this.p1.y_local) -
+        (this.p2.x_local - this.p1.x_local) * (this.p1.y_local - y));
+        const b: number = ((this.p2.x_local - x) * (this.p3.y_local - this.p2.y_local) -
+        (this.p3.x_local - this.p2.x_local) * (this.p2.y_local - y));
+        const c: number = ((this.p3.x_local - x) * (this.p1.y_local - this.p3.y_local) -
+        (this.p1.x_local - this.p3.x_local) * (this.p3.y_local - y));
+
+        //todo: add - Figure.areCoordsInside(x, y)
+        return (a > 0 && b > 0 && c > 0) || (a < 0 && b < 0 && c < 0);
+
+    }
 }

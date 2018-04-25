@@ -60,5 +60,13 @@ export default class Matrix {
     }
 
 
+    public static createTranspozition(x: number, y: number, z: number): Matrix {
+        return new Matrix([
+            [x, 0, 0],
+            [0, y, 0],
+            [0, 0, z]
+        ]);
+    }
+
 
 }

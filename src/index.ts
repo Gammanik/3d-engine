@@ -53,10 +53,60 @@ let center: Point = new Point(600, 100, 100);
 
 
 const rotationMatrixZ = Matrix.createRotationZ(angle);
-
 let turnedPoly: Polygon = polyToTurn.rotateAroundCenter(center, rotationMatrixZ);
 // poly11.draw(ctx); -- unchanged todo: value vs reference js & ts
 
 turnedPoly.draw(ctx);
 
 
+
+
+
+let polyToDrag = polyToTurn;
+
+// polyToDrag.drag(200, 0, 0, 1);
+
+
+console.log("polyToTurn local crds: ");
+console.log("p1:", Math.round(polyToDrag.p1.x_local), Math.round(polyToDrag.p1.y_local));
+console.log("p2:", Math.round(polyToDrag.p2.x_local), Math.round(polyToDrag.p2.y_local));
+console.log("p3:", Math.round(polyToDrag.p3.x_local), Math.round(polyToDrag.p3.y_local));
+
+
+
+canvas.addEventListener("mousedown", mouseDown, false);
+function mouseDown(event: MouseEvent): void {
+    let x: number = event.x;
+    let y: number = event.y;
+
+    x -= canvas.offsetLeft;
+    y -= canvas.offsetTop;
+
+    console.log("click coords: ", x, y);
+
+    // alert('x=' + x + ' y=' + y);
+
+    //todo: add - Figure.areCoordsInside(x, y)
+    if(polyToDrag.areCoordsInside(x, y)) {
+        //todo: check if the mouse inside one of the shapes
+        //todo: mouseMove(x, y)
+        console.log("INSIDE!!!: ", event.x, event.y);
+        // canvas.onmousemove = mouseMove(polyToDrag);
+    }
+
+
+}
+
+function mouseMove(event: MouseEvent, polyToDrag: Polygon) {
+    console.log("mousemove: ", event.x, event.y);
+    canvas.onmouseup = dragStop;
+    // polyToDrag.drag(200, 0, 0, 1);
+
+}
+
+function dragStop(event: MouseEvent) {
+
+    canvas.onmouseup = null;
+    canvas.onmousemove = null;
+    // canvas.removeEventListener("mousedown", mouseDown, false);
+}
