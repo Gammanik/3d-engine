@@ -28,18 +28,21 @@ export default class Polygon {
     }
 
     public rotateAroundCenter(center: Point, rotationMatrix: Matrix) {
-        let newP1 = this.p1.rotateAroundCenter(center, rotationMatrix);
-        let newP2 = this.p2.rotateAroundCenter(center, rotationMatrix);
-        let newP3 = this.p3.rotateAroundCenter(center, rotationMatrix);
-
-        return new Polygon(newP1, newP2, newP3);
+        this.p1.rotateAroundCenter(center, rotationMatrix);
+        this.p2.rotateAroundCenter(center, rotationMatrix);
+        this.p3.rotateAroundCenter(center, rotationMatrix);
     }
 
-    public drag(dx: number, dy: number, dz: number, scale: number) {
-        this.p1.x += dx;
-        this.p1.y += dy;
-        this.p2.z += dz;
+
+    public dragX(dx: number, scale: number) {
+        //todo: change local coord and then
+        this.p1.x += dx * scale;
+        this.p2.x += dx * scale;
+        this.p3.x += dx * scale;
+
+        this.recalcLocalCoords()
     }
+    // public plus(poly: Polygon)
 
     public areCoordsInside(x: number, y: number): boolean {
         const a: number = ((this.p1.x_local - x) * (this.p2.y_local - this.p1.y_local) -
@@ -51,6 +54,16 @@ export default class Polygon {
 
         //todo: add - Figure.areCoordsInside(x, y)
         return (a > 0 && b > 0 && c > 0) || (a < 0 && b < 0 && c < 0);
+
+    }
+
+    private recalcLocalCoords() {
+        this.p1.recalculateLocalCoords();
+        this.p2.recalculateLocalCoords();
+        this.p3.recalculateLocalCoords();
+    }
+
+    private recalcGlobalCoords() {
 
     }
 }

@@ -53,25 +53,18 @@ let center: Point = new Point(600, 100, 100);
 
 
 const rotationMatrixZ = Matrix.createRotationZ(angle);
-let turnedPoly: Polygon = polyToTurn.rotateAroundCenter(center, rotationMatrixZ);
+polyToTurn.rotateAroundCenter(center, rotationMatrixZ);
 // poly11.draw(ctx); -- unchanged todo: value vs reference js & ts
 
-turnedPoly.draw(ctx);
+polyToTurn.draw(ctx);
 
 
 
 
 
-let polyToDrag = polyToTurn;
-
+let polyToDrag = new Polygon(new Point(600, 550, 100), new Point(650, 600, 100), new Point(550, 600, 100));
+polyToDrag.draw(ctx);
 // polyToDrag.drag(200, 0, 0, 1);
-
-
-console.log("polyToTurn local crds: ");
-console.log("p1:", Math.round(polyToDrag.p1.x_local), Math.round(polyToDrag.p1.y_local));
-console.log("p2:", Math.round(polyToDrag.p2.x_local), Math.round(polyToDrag.p2.y_local));
-console.log("p3:", Math.round(polyToDrag.p3.x_local), Math.round(polyToDrag.p3.y_local));
-
 
 
 canvas.addEventListener("mousedown", mouseDown, false);
@@ -91,16 +84,25 @@ function mouseDown(event: MouseEvent): void {
         //todo: check if the mouse inside one of the shapes
         //todo: mouseMove(x, y)
         console.log("INSIDE!!!: ", event.x, event.y);
-        // canvas.onmousemove = mouseMove(polyToDrag);
+        canvas.onmousemove = mouseMove;
     }
 
 
 }
-
-function mouseMove(event: MouseEvent, polyToDrag: Polygon) {
-    console.log("mousemove: ", event.x, event.y);
+//, (polyToDrag: Polygon, startX: number, startY: number)
+function mouseMove(event: MouseEvent) {
+    // console.log("mousemove: ", event.x, event.y);
     canvas.onmouseup = dragStop;
-    // polyToDrag.drag(200, 0, 0, 1);
+
+    let x: number = event.x;
+    let y: number = event.y;
+
+    x -= canvas.offsetLeft;
+    y -= canvas.offsetTop;
+
+    console.log("x changed: ", x);
+    // polyToDrag.dragX(x, 1);
+    // polyToDrag.draw(ctx)
 
 }
 
@@ -108,5 +110,5 @@ function dragStop(event: MouseEvent) {
 
     canvas.onmouseup = null;
     canvas.onmousemove = null;
-    // canvas.removeEventListener("mousedown", mouseDown, false);
+    canvas.removeEventListener("mousedown", mouseDown, false);
 }

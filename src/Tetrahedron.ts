@@ -23,26 +23,19 @@ export default class Tetrahedron {
     }
 
     turnX(angle: number, center: Point) {
-        //turn
         //todo:   change only this.polyBottom.p1, this.polyBottom.p2, this.polyBottom.p3, this.polySide12.p3;
         //todo::  and others are going to change themselves (because of) in case of taking them (points) by reference
-
-        // this.polyBottom.p1 = this.polyBottom.p1.minus(center);
-        // this.polyBottom.p2 = this.polyBottom.p2.minus(center);
-        // this.polyBottom.p3 = this.polyBottom.p3.minus(center);
-        // this.polySide12.p3 = this.polyBottom.p3.minus(center);
-
-        this.polyBottom.p1 = this.polyBottom.p1.rotateAroundCenter(center, Matrix.createRotationX(angle));
-        this.polyBottom.p2 = this.polyBottom.p2.rotateAroundCenter(center, Matrix.createRotationX(angle));
-        this.polyBottom.p3 = this.polyBottom.p3.rotateAroundCenter(center, Matrix.createRotationX(angle));
-        this.polySide12.p3 = this.polySide12.p3.rotateAroundCenter(center, Matrix.createRotationX(angle));
+        this.polyBottom.p1.rotateAroundCenter(center, Matrix.createRotationX(angle));
+        this.polyBottom.p2.rotateAroundCenter(center, Matrix.createRotationX(angle));
+        this.polyBottom.p3.rotateAroundCenter(center, Matrix.createRotationX(angle));
+        this.polySide12.p3.rotateAroundCenter(center, Matrix.createRotationX(angle));
     }
 
     turnZ(angle: number, center: Point) {
-        this.polyBottom.p1 = this.polyBottom.p1.rotateAroundCenter(center, Matrix.createRotationZ(angle));
-        this.polyBottom.p2 = this.polyBottom.p2.rotateAroundCenter(center, Matrix.createRotationZ(angle));
-        this.polyBottom.p3 = this.polyBottom.p3.rotateAroundCenter(center, Matrix.createRotationZ(angle));
-        this.polySide12.p3 = this.polySide12.p3.rotateAroundCenter(center, Matrix.createRotationZ(angle));
+        this.polyBottom.p1.rotateAroundCenter(center, Matrix.createRotationZ(angle));
+        this.polyBottom.p2.rotateAroundCenter(center, Matrix.createRotationZ(angle));
+        this.polyBottom.p3.rotateAroundCenter(center, Matrix.createRotationZ(angle));
+        this.polySide12.p3.rotateAroundCenter(center, Matrix.createRotationZ(angle));
     }
 
 

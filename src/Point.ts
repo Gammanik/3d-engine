@@ -21,36 +21,29 @@ export default class Point {
     }
 
     //todo: how could I avoid always create new object?
-    private recalculateLocalCoords(): Point {
+    public recalculateLocalCoords(): void {
         this.x_local = Project.findLocalX(this.x, this.z);
         this.y_local = Project.findLocalY(this.y, this.z);
-
-        return this;
     }
     
-    private minus(point: Point): Point {
-        let xNew = this.x - point.x;
-        let yNew = this.y - point.y;
-        let zNew = this.z - point.z;
-
-        return new Point(xNew, yNew, zNew);
+    private minus(point: Point): void {
+        this.x -= point.x;
+        this.y -= point.y;
+        this.z -= point.z;
     }
 
-    private plus(point: Point): Point {
-        let xNew = this.x + point.x;
-        let yNew = this.y + point.y;
-        let zNew = this.z + point.z;
-        //todo: do I have to return a new obj?
-        return new Point(xNew, yNew, zNew);
+    private plus(point: Point): void {
+        this.x += point.x;
+        this.y += point.y;
+        this.z += point.z;
     }
 
-    public rotateAroundCenter(center: Point, rotationMatrix: Matrix): Point {
-        let res = this.minus(center);
-        const coordsArray = rotationMatrix.multiplyOnVector([res.x, res.y, res.z]);
-        res.x = coordsArray[0]; res.y = coordsArray[1]; res.z = coordsArray[2];
-        res = res.plus(center);
+    public rotateAroundCenter(center: Point, rotationMatrix: Matrix): void {
+        this.minus(center);
+        const coordsArray = rotationMatrix.multiplyOnVector([this.x, this.y, this.z]);
+        this.x = coordsArray[0]; this.y = coordsArray[1]; this.z = coordsArray[2];
+        this.plus(center);
 
-        res = res.recalculateLocalCoords();
-        return res;
+        this.recalculateLocalCoords();
     }
 }
