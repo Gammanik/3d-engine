@@ -20,12 +20,15 @@ export default class Point {
         this.y_local = Project.findLocalY(y, z);
     }
 
-    //todo: how could I avoid always create new object?
     public recalculateLocalCoords(): void {
         this.x_local = Project.findLocalX(this.x, this.z);
         this.y_local = Project.findLocalY(this.y, this.z);
     }
-    
+
+    // public recalculateGlobalCoods() {
+    //
+    // }
+
     private minus(point: Point): void {
         this.x -= point.x;
         this.y -= point.y;

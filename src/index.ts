@@ -15,29 +15,18 @@ const ctx: CanvasRenderingContext2D = <CanvasRenderingContext2D>canvas.getContex
 ctx.fillRect(10, 10, 10, 10);
 
 
-let p1: Point = new Point(100, 150, 100);
-let p2: Point = new Point(50, 200, 100);
-let p3: Point = new Point(150, 200, 100);
-let v1: Point = new Point(100, 100, 250);
-
-const polyBottom: Polygon = new Polygon(p1, p2, p3);
-const polySide12: Polygon = new Polygon(p1, p2, v1);
-const polySide23: Polygon = new Polygon(p2, p3, v1);
-const polySide31: Polygon = new Polygon(p3, p1, v1);
-
-const teth: Tetrahedron = new Tetrahedron(polyBottom, polySide12, polySide23, polySide31);
-teth.draw(ctx);
-
 //todo: add Polygons, Teth ect in the figuresTree during creation
 //todo: add class Figure.draw()
 // function drawAllFigures(figuresTree: Array<Figure>) {}
-function redrawAllFigures(figuresTree: Array<number>) {}
+function redrawAllFigures() {}
 
+// window.requestAnimationFrame(redrawAllFigures)
 // let turnedTeth = teth.tethturnX(200, new Point(100, 0, 0));
 // turnedTeth.draw();
 // teth.draw(ctx);
 
 
+createTeth();
 
 //todo check for let & const
 let p11: Point = new Point(600, 150, 100);
@@ -54,9 +43,10 @@ let center: Point = new Point(600, 100, 100);
 
 const rotationMatrixZ = Matrix.createRotationZ(angle);
 polyToTurn.rotateAroundCenter(center, rotationMatrixZ);
-// poly11.draw(ctx); -- unchanged todo: value vs reference js & ts
 
 polyToTurn.draw(ctx);
+
+
 
 
 
@@ -81,9 +71,10 @@ function mouseDown(event: MouseEvent): void {
 
     //todo: add - Figure.areCoordsInside(x, y)
     if(polyToDrag.areCoordsInside(x, y)) {
-        //todo: check if the mouse inside one of the shapes
-        //todo: mouseMove(x, y)
         console.log("INSIDE!!!: ", event.x, event.y);
+        //todo: polyToDragInitial = polyToDrag.copy
+        //and send it to the onMouseMove
+
         canvas.onmousemove = mouseMove;
     }
 
@@ -101,14 +92,29 @@ function mouseMove(event: MouseEvent) {
     y -= canvas.offsetTop;
 
     console.log("x changed: ", x);
-    // polyToDrag.dragX(x, 1);
-    // polyToDrag.draw(ctx)
+    //{...polyToDrag} -- todo: set initialPolyToDrag state?
+    polyToDrag.dragX(1);
+    polyToDrag.draw(ctx)
 
 }
 
 function dragStop(event: MouseEvent) {
-
     canvas.onmouseup = null;
     canvas.onmousemove = null;
-    canvas.removeEventListener("mousedown", mouseDown, false);
+}
+
+
+function createTeth() {
+    let p1: Point = new Point(100, 150, 100);
+    let p2: Point = new Point(50, 200, 100);
+    let p3: Point = new Point(150, 200, 100);
+    let v1: Point = new Point(100, 100, 250);
+
+    const polyBottom: Polygon = new Polygon(p1, p2, p3);
+    const polySide12: Polygon = new Polygon(p1, p2, v1);
+    const polySide23: Polygon = new Polygon(p2, p3, v1);
+    const polySide31: Polygon = new Polygon(p3, p1, v1);
+
+    const teth: Tetrahedron = new Tetrahedron(polyBottom, polySide12, polySide23, polySide31);
+    teth.draw(ctx);
 }

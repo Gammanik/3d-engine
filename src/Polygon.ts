@@ -11,9 +11,8 @@ export default class Polygon {
     }
 
     draw(ctx: CanvasRenderingContext2D) {
-        //todo: write my own drawPoly?
         ctx.moveTo(this.p3.x_local, this.p3.y_local);
-        ctx.lineTo(this.p1.x_local, this.p1.y_local); //todo: write my own drawLine(from: Point, to: Point)?
+        ctx.lineTo(this.p1.x_local, this.p1.y_local);
         ctx.lineTo(this.p2.x_local, this.p2.y_local);
         ctx.lineTo(this.p3.x_local, this.p3.y_local);
         ctx.stroke();
@@ -34,13 +33,14 @@ export default class Polygon {
     }
 
 
-    public dragX(dx: number, scale: number) {
+    //todo: add initPoly: Polygon - copy of initial poly state
+    public dragX(dx: number) {
         //todo: change local coord and then
-        this.p1.x += dx * scale;
-        this.p2.x += dx * scale;
-        this.p3.x += dx * scale;
+        this.p1.x_local += dx;// - initPoly.p1.x_local;
+        this.p2.x_local += dx;// - initPoly.p2.x_local;
+        this.p3.x_local += dx;// - initPoly.p3.x_local;
 
-        this.recalcLocalCoords()
+        this.recalcGlobalCoords()
     }
     // public plus(poly: Polygon)
 
