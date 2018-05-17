@@ -3,6 +3,7 @@ import Polygon from './Polygon'
 import Tetrahedron from "./Tetrahedron";
 import {log} from "util";
 import Matrix from "./Matrix";
+import Loading from "./loading";
 
 
 log('Hello Webpack');
@@ -28,7 +29,7 @@ function redrawAllFigures() {}
 
 createTeth();
 
-//todo check for let & const
+
 let p11: Point = new Point(600, 150, 100);
 let p21: Point = new Point(650, 200, 100);
 let p31: Point = new Point(550, 200, 100);
@@ -36,19 +37,13 @@ let p31: Point = new Point(550, 200, 100);
 let polyToTurn: Polygon = new Polygon(p11, p21, p31);
 polyToTurn.draw(ctx);
 
-
 let angle: number = 55;
 let center: Point = new Point(600, 100, 100);
 
 
 const rotationMatrixZ = Matrix.createRotationZ(angle);
 polyToTurn.rotateAroundCenter(center, rotationMatrixZ);
-
 polyToTurn.draw(ctx);
-
-
-
-
 
 
 
@@ -57,6 +52,10 @@ polyToDrag.draw(ctx);
 // polyToDrag.drag(200, 0, 0, 1);
 
 
+new Loading();
+
+
+//todo:: put in a separate class
 canvas.addEventListener("mousedown", mouseDown, false);
 function mouseDown(event: MouseEvent): void {
     let x: number = event.x;

@@ -42,7 +42,7 @@ export default class Polygon {
 
         this.recalcGlobalCoords()
     }
-    // public plus(poly: Polygon)
+    // public dragXY(dx: number, dy: number)
 
     public areCoordsInside(x: number, y: number): boolean {
         const a: number = ((this.p1.x_local - x) * (this.p2.y_local - this.p1.y_local) -
@@ -54,7 +54,6 @@ export default class Polygon {
 
         //todo: add - Figure.areCoordsInside(x, y)
         return (a > 0 && b > 0 && c > 0) || (a < 0 && b < 0 && c < 0);
-
     }
 
     private recalcLocalCoords() {
